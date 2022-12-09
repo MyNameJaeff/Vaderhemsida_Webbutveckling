@@ -18,17 +18,18 @@
     </style>
 </head>
 <body class="bg-dark">
-    <div class="container bg-secondary d-flex justify-content-center align-items-center" style="height: 100px;">
-        <input>
+    <div class="container bg-secondary d-flex flex-row justify-content-center align-items-center" style="height: 100px;">
+        <input id="input">
+        <button id="submit" onclick="createCard()">Button</button>
     </div>
-    <div class="container bg-secondary p-3" style="height: 750px; margin-top: 2%;">
+    <div class="container bg-secondary p-3" style="height: 750px; margin-top: 2%; display: flex; overflow-y: auto;" id="cardContainer">
         <div class="card" style="width: 30rem;">
             <div class="card-body">
-                <h1 class="card-title" id="CityName">London</h5>
+                <h1 class="card-title" id="CityName">Stockholm</h5>
                 <div class="card-text container d-flex" style="margin-left: 30%;">
                     <p style="width: 80px; font-size: 0.9em;">Temperatur max/min</p>
-                    <p style="width: 75px; font-size: 0.9em;">Nederbörd per dygn</p>
-                    <p style="width: 70px; font-size: 0.9em;">Vind / byvind</p>
+                    <p style="width: 80px; font-size: 0.9em;">Nederbörd per dygn</p>
+                    <p style="width: 70px; font-size: 0.9em;">Vind</p>
                 </div>
                 <div class="boxed card-text">
                     <div style="padding: 0px 0% 0px 5%; width: 175px;">
@@ -126,17 +127,66 @@
         </div>
     </div>
     <script>
-        let cityName = document.getElementById("CityName").innerText;
-        `https://api.openweathermap.org/data/2.5/weather?q=London&appid=11ce47de9c4fb72f072a0168191280dd`
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=11ce47de9c4fb72f072a0168191280dd`)
+        function getInput(){
+            let cityName = document.getElementById("CityName").innerText;
+            return cityName;
+        }
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${getInput()}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=5`)
         .then(x => x.json())
         .then(data =>
-            data.weather.forEach(element => {
-                console.log(element)
-            })
+            console.log(data)
         )
-        function createCard(cityName){
-            
+        function createCard(){
+            let cityName = document.getElementById("CityName").innerText;
+            var card = document.createElement("div");
+            card.classList = "card"; card.style = "width: 30rem";
+
+            var cardBod = document.createElement("div");
+            cardBod.classList = "card-body";
+
+            var cardTitle = document.createElement("h1");
+            cardTitle.classList = "card-title"; cardTitle.id = "CityName"; cardTitle.innerText = cityName;
+            cardBod.appendChild(cardTitle);
+
+            //
+            var cardInfos = document.createElement("div");
+            cardInfos.classList = "card-text container d-flex"; cardInfos.style = "margin-left: 30%;";
+
+            var info1 = document.createElement("p");
+            info1.style = "width: 80px; font-size: 0.9em;"; info1.innerText = "Temperatur max/min"
+
+            var info2 = document.createElement("p");
+            info2.style = "width: 75px; font-size: 0.9em;"; info2.innerText = "Nederbörd per dygn"
+
+            var info3 = document.createElement("p");
+            info3.style = "width: 70px; font-size: 0.9em;"; info3.innerText = "Vind / byvind"
+
+            cardInfos.appendChild(info1);cardInfos.appendChild(info2);cardInfos.appendChild(info3);
+            cardBod.appendChild(cardInfos);
+            //
+
+            //
+            var cardText1 = document.createElement("div");
+            cardText1.classList = "boxed card-text"; cardText1.style = "margin-left: 30%;";
+
+            var current = document.createElement("div");
+            current.style = "padding: 0px 0% 0px 5%; width: 175px;";
+
+            var day = document.createElement("h4");
+            day.innerText = "Idag";
+
+            var date = document.createElement("h4");
+            date.innerText = "9 dec";
+            current.appendChild(day); current.appendChild(date); cardText1.appendChild(current);
+
+            var line = document.createElement("div");
+            line.classList = "vl"; line.style = "border-left:1px solid black; height: 100px;";
+            cardText1.appendChild(line);
+            //
+            card.appendChild(cardBod);
+
+            let cardContainer = document.getElementById("cardContainer");
+            cardContainer.appendChild(card);
         }
     </script>
 </body>
