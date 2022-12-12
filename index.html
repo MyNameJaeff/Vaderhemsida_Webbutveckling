@@ -19,7 +19,7 @@
 </head>
 <body class="bg-dark">
     <div class="container bg-secondary d-flex flex-row justify-content-center align-items-center" style="height: 100px; margin-top: 0.5%;">
-        <input id="input">
+        <input id="input" required placeholder="City name here">
         <button id="submit" onclick="createCard()">Button</button>
     </div>
     <div class="bg-secondary p-3" style="height: 750px; margin-left: 4%; margin-right: 4%; margin-top: 2%; margin-bottom: 2%; display: flex; flex-wrap: wrap; overflow-y: auto; overflow-x: hidden; justify-content: space-evenly;" id="cardContainer">
@@ -108,8 +108,8 @@
                     <div class="vl" style="border-left:1px solid black; height: 100px;"></div> 
                     <div class="boxed" style="justify-content: space-evenly;">
                         <div>
-                            <h5 id="lTemp3">-3</h5>
-                            <h5 id="hTemp3">-5</h5>
+                            <h5 id="hTemp3">-3</h5>
+                            <h5 id="lTemp3">-5</h5>
                         </div>
                         <div>
                             <h5 id="regn3">0,0mm</h5>
@@ -133,26 +133,64 @@
             return cityName;
         }
         function createCard(){
-            let arr = [];
+            let cityName = document.getElementById("input").value;
+            document.getElementById(`CityName`).innerHTML = cityName;
+            let n = 0;
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth(); //January is 0!
+            var monthString = "";
             let getWeather = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${getInput()}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=4`)
             .then(x => x.json())
             .then(data =>
                 data.list.forEach(element => {
-                    arr.push(element)
+                    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                    const d = new Date();
+                    let day = weekday[d.getDay() + n];
+                    document.getElementById(`dag${n}`).innerHTML = day;
+                    switch(mm){
+                        case 0:
+                            monthString = "Jan";
+                        case 1:
+                            monthString = "Feb";
+                        case 2:
+                            monthString = "Mar";
+                        case 3:
+                            monthString = "Apr";
+                        case 4:
+                            monthString = "Maj";
+                        case 5:
+                            monthString = "Jun";
+                        case 6:
+                            monthString = "Jul";
+                        case 7:
+                            monthString = "Aug";
+                        case 8:
+                            monthString = "Sep";
+                        case 9:
+                            monthString = "Okt";
+                        case 10:
+                            monthString = "Nov";
+                        case 11:
+                            monthString = "Dec";
+                    }
+                    document.getElementById(`datum${n}`).innerHTML =  dd + n + " " + monthString;
+                    document.getElementById(`hTemp${n}`).innerHTML = Math.floor((element.main.temp_max - 273.15) * 10) / 10 + "°";
+                    document.getElementById(`lTemp${n}`).innerHTML = Math.floor((element.main.temp_min - 273.15) * 10) / 10 + "°";
+                    console.log(element);
+                    if(element.hasOwnProperty("snow")){
+                        document.getElementById(`regn${n}`).innerHTML = Object.values(element.snow)[0] + "mm"; 
+                    }else{
+                        document.getElementById(`regn${n}`).innerHTML = "0,0mm";
+                    }
+                    document.getElementById(`vind${n}`).innerHTML = Math.floor(element.wind.speed) + " m/s";
+                    document.getElementById(`byvind${n}`).innerHTML = Math.floor(element.wind.gust) + " m/s";
+                    document.getElementById(`väderImg${n}`).src = `sun.png`
+                    n++;
+                   
                 })
             )
-            console.log(arr);
-            let cityName = document.getElementById("input").value;
-            for(let n = 0; n < 4; n++){
-                document.getElementById(`CityName`).innerHTML = cityName;
-                document.getElementById(`dag${n}`).innerHTML = `Idag`;
-                document.getElementById(`datum${n}`).innerHTML = `12 Dec`
-                document.getElementById(`hTemp${n}`).innerHTML = `-8`;
-                document.getElementById(`lTemp${n}`).innerHTML = `-12`
-                document.getElementById(`vind${n}`).innerHTML = `1m/s`
-                document.getElementById(`byvind${n}`).innerHTML = `2m/s`
-                document.getElementById(`väderImg${n}`).src = `sun.png`
-            }
+            
         }
     </script>
 </body>
