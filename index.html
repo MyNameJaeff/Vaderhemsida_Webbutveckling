@@ -15,6 +15,35 @@
             border: solid black 1px; 
             align-items: center;
         }
+        .cardBoxStyling{
+            height: 750px; 
+            margin-left: 4%; 
+            margin-right: 4%; 
+            margin-top: 2%; 
+            margin-bottom: 2%; 
+            display: flex; 
+            flex-wrap: wrap; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            justify-content: space-evenly;
+        }
+        .cardStyling{
+            width: 450px; 
+            margin-top: 2%; 
+            margin-bottom: 2%;
+        }
+        .cardTitle{
+            margin-left: 30%;
+        }
+        .cardTitle1{
+            width: 80px; font-size: 0.9em;
+        }
+        .cardTitle2{
+            width: 70px; font-size: 0.9em;
+        }
+        .boxesDown{
+            margin-top: 5%;
+        }
     </style>
 </head>
 <body class="bg-dark">
@@ -22,104 +51,104 @@
         <input id="input" required placeholder="City name here">
         <button id="submit" onclick="createCard()">Button</button>
     </div>
-    <div class="bg-secondary p-3" style="height: 750px; margin-left: 4%; margin-right: 4%; margin-top: 2%; margin-bottom: 2%; display: flex; flex-wrap: wrap; overflow-y: auto; overflow-x: hidden; justify-content: space-evenly;" id="cardContainer">
-        <div class="card" style="width: 500px; margin-top: 2%; margin-bottom: 2%;">
+    <div id="card2" class="bg-secondary p-3 cardBoxStyling" id="cardContainer">
+        <div class="card cardStyling"id="card">
             <div class="card-body">
                 <h1 class="card-title" id="CityName">Stockholm</h5>
-                <div class="card-text container d-flex" style="margin-left: 30%;">
-                    <p style="width: 80px; font-size: 0.9em;">Temperatur max/min</p>
-                    <p style="width: 80px; font-size: 0.9em;">Nederbörd per dygn</p>
-                    <p style="width: 70px; font-size: 0.9em;">Vind</p>
+                <div class="card-text container d-flex cardTitle">
+                    <p class="cardTitle1">Temperatur max/min</p>
+                    <p class="cardTitle1">Nederbörd per dygn</p>
+                    <p class="cardTitle2">Vind</p>
                 </div>
                 <div class="boxed card-text">
-                    <div style="padding: 0px 0% 0px 5%; width: 175px;">
-                        <h4 id="dag0">Idag</h4>
-                        <h5 id="datum0">8 dec</h5>
+                    <div style="padding: 0px 0% 0px 5%; width: 200px;">
+                        <h4 id="dag0"></h4>
+                        <h5 id="datum0"></h5>
                     </div>
                     <div class="vl" style="border-left:1px solid black; height: 100px;"></div> 
                     <div class="boxed" style="justify-content: space-evenly;">
                         <div>
-                            <h5 id="hTemp0">-3</h5>
-                            <h5 id="lTemp0">-5</h5>
+                            <h5 id="hTemp0"></h5>
+                            <h5 id="lTemp0"></h5>
                         </div>
                         <div>
-                            <h5 id="regn0">0,0mm</h5>
+                            <h5 id="regn0"></h5>
                         </div>
                         <div>
-                            <h5 id="vind0">Idag</h5>
-                            <h5 id="byvind0">Idag</h5>
+                            <h5 id="vind0"></h5>
+                            <h5 id="byvind0"></h5>
                         </div>
                         <div style="height: 60%; margin-right: -10px;">
-                            <img src="sun.png" alt="sun" height="100%" id="väderImg0">
+                            <img src="" alt="" height="100%" id="väderImg0">
                         </div>
                     </div>
                 </div>
-                <div class="boxed card-text" style="margin-top: 5%;">
-                    <div style="padding: 0px 0% 0px 5%; width: 175px;">
-                        <h4 id="dag1">Imorgon</h4>
-                        <h5 id="datum1">9 dec</h5>
+                <div class="boxed card-text boxesDown">
+                    <div style="padding: 0px 0% 0px 5%; width: 200px;">
+                        <h4 id="dag1"></h4>
+                        <h5 id="datum1"></h5>
                     </div>
                     <div class="vl" style="border-left:1px solid black; height: 100px;"></div> 
                     <div class="boxed" style="justify-content: space-evenly;">
                         <div>
-                            <h5 id="hTemp1">-3</h5>
-                            <h5 id="lTemp1">-5</h5>
+                            <h5 id="hTemp1"></h5>
+                            <h5 id="lTemp1"></h5>
                         </div>
                         <div>
-                            <h5 id="regn1">0,0mm</h5>
+                            <h5 id="regn1"></h5>
                         </div>
                         <div>
-                            <h5 id="vind1">Idag</h5>
-                            <h5 id="byvind1">Idag</h5>
+                            <h5 id="vind1"></h5>
+                            <h5 id="byvind1"></h5>
                         </div>
                         <div style="height: 60%; margin-right: -10px;">
-                            <img src="sun.png" alt="sun" height="100%" id="väderImg1">
+                            <img src="" alt="" height="100%" id="väderImg1">
                         </div>
                     </div>
                 </div>
-                <div class="boxed card-text" style="margin-top: 5%;">
-                    <div style="padding: 0px 0% 0px 5%; width: 175px;">
-                        <h4 id="dag2">Lördag</h4>
-                        <h5 id="datum2">10 dec</h5>
+                <div class="boxed card-text boxesDown">
+                    <div style="padding: 0px 0% 0px 5%; width: 200px;">
+                        <h4 id="dag2"></h4>
+                        <h5 id="datum2"></h5>
                     </div>
                     <div class="vl" style="border-left:1px solid black; height: 100px;"></div> 
                     <div class="boxed" style="justify-content: space-evenly;">
                         <div>
-                            <h5 id="hTemp2">-3</h5>
-                            <h5 id="lTemp2">-5</h5>
+                            <h5 id="hTemp2"></h5>
+                            <h5 id="lTemp2"></h5>
                         </div>
                         <div>
-                            <h5 id="regn2">0,0mm</h5>
+                            <h5 id="regn2"></h5>
                         </div>
                         <div>
-                            <h5 id="vind2">Idag</h5>
-                            <h5 id="byvind2">Idag</h5>
+                            <h5 id="vind2"></h5>
+                            <h5 id="byvind2"></h5>
                         </div>
                         <div style="height: 60%; margin-right: -10px;">
-                            <img src="sun.png" alt="sun" height="100%" id="väderImg2">
+                            <img src="" alt="" height="100%" id="väderImg2">
                         </div>
                     </div>
                 </div>
-                <div class="boxed card-text" style="margin-top: 5%;">
-                    <div style="padding: 0px 0% 0px 5%; width: 175px;">
-                        <h4 id="dag3">Söndag</h4>
-                        <h5 id="datum3">11 dec</h5>
+                <div class="boxed card-text boxesDown">
+                    <div style="padding: 0px 0% 0px 5%; width: 200px;">
+                        <h4 id="dag3"></h4>
+                        <h5 id="datum3"></h5>
                     </div>
                     <div class="vl" style="border-left:1px solid black; height: 100px;"></div> 
                     <div class="boxed" style="justify-content: space-evenly;">
                         <div>
-                            <h5 id="hTemp3">-3</h5>
-                            <h5 id="lTemp3">-5</h5>
+                            <h5 id="hTemp3"></h5>
+                            <h5 id="lTemp3"></h5>
                         </div>
                         <div>
-                            <h5 id="regn3">0,0mm</h5>
+                            <h5 id="regn3"></h5>
                         </div>
                         <div>
-                            <h5 id="vind3">Idag</h5>
-                            <h5 id="byvind3">Idag</h5>
+                            <h5 id="vind3"></h5>
+                            <h5 id="byvind3"></h5>
                         </div>
                         <div style="height: 60%; margin-right: -10px;">
-                            <img src="sun.png" alt="sun" height="100%" id="väderImg3">
+                            <img src="" alt="" height="100%" id="väderImg3">
                         </div>
                     </div>
                 </div>
@@ -127,13 +156,17 @@
         </div>
     </div>
     <script>
+        let a = 0;
         function getInput(){
             cityName = document.getElementById("input").value;
             console.log(cityName)
             return cityName;
         }
+        function createNewCard(){
+
+        }
         function createCard(){
-            let cityName = document.getElementById("input").value;
+            cityName = document.getElementById("input").value;
             document.getElementById(`CityName`).innerHTML = cityName;
             let n = 0;
             var today = new Date();
@@ -142,12 +175,17 @@
             var monthString = "";
             let getWeather = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${getInput()}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=4`)
             .then(x => x.json())
-            .then(data =>
-                data.list.forEach(element => {
+            .then(data => data.list.forEach(element => {
                     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                     const d = new Date();
                     let day = weekday[d.getDay() + n];
-                    document.getElementById(`dag${n}`).innerHTML = day;
+                    if(n == 0){
+                        document.getElementById(`dag${n}`).innerHTML = "Today";
+                    }else if(n == 1){
+                        document.getElementById(`dag${n}`).innerHTML = "Tomorow";
+                    }else{
+                        document.getElementById(`dag${n}`).innerHTML = day.substr(0,3);
+                    }
                     switch(mm){
                         case 0:
                             monthString = "Jan";
@@ -180,14 +218,19 @@
                     console.log(element);
                     if(element.hasOwnProperty("snow")){
                         document.getElementById(`regn${n}`).innerHTML = Object.values(element.snow)[0] + "mm"; 
+                    }else if(element.hasOwnProperty("rain")){
+                        document.getElementById(`regn${n}`).innerHTML = Object.values(element.rain)[0] + "mm";
                     }else{
                         document.getElementById(`regn${n}`).innerHTML = "0,0mm";
                     }
                     document.getElementById(`vind${n}`).innerHTML = Math.floor(element.wind.speed) + " m/s";
                     document.getElementById(`byvind${n}`).innerHTML = Math.floor(element.wind.gust) + " m/s";
-                    document.getElementById(`väderImg${n}`).src = `sun.png`
-                    n++;
-                   
+                    var iconcode = element.weather[0].icon;
+                    var iconAlt = element.weather[0].description;
+                    document.getElementById(`väderImg${n}`).src = `http://openweathermap.org/img/w/` + iconcode + ".png";
+                    document.getElementById(`väderImg${n}`).alt = iconAlt;
+                    n++; a++;
+                    console.log(n + " " + a)
                 })
             )
             
