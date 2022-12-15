@@ -16,7 +16,7 @@
             align-items: center;
         }
         .cardBoxStyling{
-            height: 750px; 
+            height: 100%;
             margin-left: 4%; 
             margin-right: 4%; 
             margin-top: 2%; 
@@ -26,6 +26,9 @@
             overflow-y: auto; 
             overflow-x: hidden; 
             justify-content: space-evenly;
+        }
+        .card-body{
+            padding-bottom: 5%;
         }
         .cardStyling{
             width: 450px; 
@@ -54,7 +57,7 @@
     <div id="card2" class="bg-secondary p-3 cardBoxStyling" id="cardContainer">
         <div class="card cardStyling"id="card">
             <div class="card-body">
-                <h1 class="card-title" id="CityName">Stockholm</h5>
+                <h1 class="card-title" id="CityName"></h5>
                 <div class="card-text container d-flex cardTitle">
                     <p class="cardTitle1">Temperatur max/min</p>
                     <p class="cardTitle1">Nederbörd per dygn</p>
@@ -157,28 +160,105 @@
     </div>
     <script>
         let a = 0;
-        function getInput(){
-            cityName = document.getElementById("input").value;
-            console.log(cityName)
-            return cityName;
-        }
+        createNewCard()
         function createNewCard(){
+            let card = document.createElement("div");
+            card.classList = "card cardStyling"; card.id = `${a}card`;
 
+            let cardBod = document.createElement("div");
+            cardBod.classList = "card-body";
+            
+            let cardTitle = document.createElement("h1");
+            cardTitle.classList = "card-title"; cardTitle.id = `${a}CityName`; //Måste ha något nummer baserat på mängd inputs
+
+            // 1
+            let cardTextNo = document.createElement("div");
+            cardTextNo.classList = "card-text container d-flex cardTitle";
+
+            let cardTitle1 = document.createElement("p");
+            let cardTitle2 = document.createElement("p");
+            let cardTitle3 = document.createElement("p");
+            cardTitle1.classList = "cardTitle1"; cardTitle2.classList = "cardTitle2"; cardTitle3.classList = "cardTitle3";
+
+            cardTextNo.appendChild(cardTitle1);cardTextNo.appendChild(cardTitle2);cardTextNo.appendChild(cardTitle3);
+            // !1
+
+            let cardTextYes = document.createElement("div");
+            cardTextYes.classList = "boxed card-text";
+
+            // 2
+            let cardBox1 = document.createElement("div");
+            cardBox1.style = "padding: 0px 0% 0px 5%; width: 200px;";
+
+            let day = document.createElement("h5");
+            let date = document.createElement("h5");
+            day.id = `${a}dag`; date.id = `${a}datum`; //Båda måste ha tal på slutet 1-4
+
+            cardBox1.appendChild(day); cardBox1.appendChild(date);
+            // !2
+
+            let cardLine = document.createElement("div");
+            cardLine.classList = "vl"; cardLine.style = "border-left:1px solid black; height: 100px;";
+
+            // 3
+            let cardBox2 = document.createElement("div");
+            cardBox2.classList = "boxed"; cardBox2.style = "justify-content: space-evenly;";
+
+            let cardTemp = document.createElement("div");
+            let lTemp = document.createElement("h5");
+            let hTemp = document.createElement("h5");
+            lTemp.id = `${a}lTemp`; hTemp = `${a}hTemp`; //Båda måste ha tal på slutet 1-4
+
+            cardTemp.appendChild(lTemp); cardTemp.appendChild(hTemp);
+
+            let cardRain = document.createElement("div");
+            let rain = document.createElement("h5");
+            rain.id = `${a}regn` //Måste ha tal på slutet 1-4
+
+            cardRain.appendChild(rain);
+
+            let cardWind = document.createElement("div");
+            let wind = document.createElement("h5");
+            let gust = document.createElement("h5");
+            wind.id = `${a}vind` //Måste ha tal på slutet 1-4
+            gust.id = `${a}byvind` //Måste ha tal på slutet 1-4
+
+            cardWind.appendChild(wind); cardWind.appendChild(gust);
+
+            let cardIconBox = document.createElement("div");
+            cardIconBox.style = "height: 60%; margin-right: -10px;";
+
+            let cardIcon = document.createElement("img");
+            cardIcon.id = `${a}väderImg` //Måste ha tal på slutet 1-4
+
+            cardIconBox.appendChild(cardIcon);
+
+            cardBox2.appendChild(cardTemp)
+            cardBox2.appendChild(cardRain)
+            cardBox2.appendChild(cardWind)
+            cardBox2.appendChild(cardIconBox)
+            // !3
+            cardTextYes.appendChild(cardBox1); cardTextYes.appendChild(cardBox2);
+            cardBod.appendChild(cardTitle); cardBod.appendChild(cardTextNo); cardBod.appendChild(cardTextYes);
+            card.appendChild(cardBod);
         }
-        function createCard(){
+        function capitalizeFirstLetter(string){ //Gör om en string till samma men capitalized
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        function createCard(){ //Ändrar kortet och ger värdet för 4 dagar
             cityName = document.getElementById("input").value;
-            document.getElementById(`CityName`).innerHTML = cityName;
+            document.getElementById(`CityName`).innerHTML = capitalizeFirstLetter(cityName);
             let n = 0;
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth(); //January is 0!
             var monthString = "";
-            let getWeather = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${getInput()}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=4`)
+            let getWeather = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=4`)
             .then(x => x.json())
             .then(data => data.list.forEach(element => {
                     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                     const d = new Date();
-                    let day = weekday[d.getDay() + n];
+                    let day = weekday[d.getDay()] + n;
                     if(n == 0){
                         document.getElementById(`dag${n}`).innerHTML = "Today";
                     }else if(n == 1){
