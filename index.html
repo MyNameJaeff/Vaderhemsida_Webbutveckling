@@ -71,16 +71,16 @@
         let cityNames = [];
 
         function createNewCard(){
-            cityName = document.getElementById("input").value
+            cityName = document.getElementById("input").value;
             fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=11ce47de9c4fb72f072a0168191280dd&cnt=4`)
             .then((response) => {
                 if(!response.ok){
-                    alert("Thats not a valid city name (or something)")
+                    alert("Thats not a valid city name (or something)");
                 }else{
                     if(cityNames.includes(cityName.toLowerCase())){
-                        alert("You cant have the same city twice")
+                        alert("You cant have the same city twice");
                     }else{
-                        let cardBox = document.getElementById("card2"); cardBox.classList.add("bg-secondary")
+                        let cardBox = document.getElementById("card2"); cardBox.classList.add("bg-secondary");
                         let card = document.createElement("div");
                         card.classList = "card cardStyling"; card.id = `${numberOfCards}card`;
 
@@ -136,15 +136,15 @@
 
                             let cardRain = document.createElement("div");
                             let rain = document.createElement("h5");
-                            rain.id = `${numberOfCards}regn${x}` //Måste ha tal på slutet 1-4
+                            rain.id = `${numberOfCards}regn${x}`
 
                             cardRain.appendChild(rain);
 
                             let cardWind = document.createElement("div");
                             let wind = document.createElement("h5");
                             let gust = document.createElement("h5");
-                            wind.id = `${numberOfCards}vind${x}` //Måste ha tal på slutet 1-4
-                            gust.id = `${numberOfCards}byvind${x}` //Måste ha tal på slutet 1-4
+                            wind.id = `${numberOfCards}vind${x}`
+                            gust.id = `${numberOfCards}byvind${x}`
 
                             cardWind.appendChild(wind); cardWind.appendChild(gust);
 
@@ -152,14 +152,14 @@
                             cardIconBox.style = "height: 60%; margin-right: -10px;";
 
                             let cardIcon = document.createElement("img");
-                            cardIcon.id = `${numberOfCards}väderImg${x}` //Måste ha tal på slutet 1-4
+                            cardIcon.id = `${numberOfCards}väderImg${x}`;
 
                             cardIconBox.appendChild(cardIcon);
 
-                            cardBox2.appendChild(cardTemp)
-                            cardBox2.appendChild(cardRain)
-                            cardBox2.appendChild(cardWind)
-                            cardBox2.appendChild(cardIconBox)
+                            cardBox2.appendChild(cardTemp);
+                            cardBox2.appendChild(cardRain);
+                            cardBox2.appendChild(cardWind);
+                            cardBox2.appendChild(cardIconBox);
                             cardTextYes.appendChild(cardBox1); cardTextYes.appendChild(cardBox2);
                             cardBod.appendChild(cardTextYes);
                         }
@@ -177,7 +177,7 @@
         }
         function createCard(){ //Ändrar kortet och ger värdet för 4 dagar
             cityName = document.getElementById("input").value;
-            cityNames.push(cityName.toLowerCase())
+            cityNames.push(cityName.toLowerCase());
             document.getElementById(`${numberOfCards2}CityName`).innerHTML = capitalizeFirstLetter(cityName);
             let n = 0;
             var today = new Date();
@@ -195,48 +195,46 @@
                         const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                         const d = new Date();
                         let dayNumber = d.getDay();
-                        let day;
-                        switch(Math.ceil(dayNumber + (n/2))){ //Kollar nummer av dag det är och ifall det över listan går runt igen (kan finnas gömmd bugg)
-                            case 7:
-                                day = weekday[0]
-                                break;
-                            case 8:
-                                day = weekday[1]
-                                break;
-                            case 9:
-                                day = weekday[2]
-                                break;
-                            default:
-                                day = weekday[dayNumber + Math.ceil(n/2)]
-                                break;
+                        let day; let day2;
+                        switch(dayNumber){ //Kollar nummer av dag det är och ifall det över listan går runt igen (kan finnas gömmd bugg baserat på datum osv osv)
+                            case 5:
+                                day = weekday[0];
+                                day2 = weekday[1];
+                            case 6:
+                                day = weekday[1];
+                                day2 = weekday[2];
                         }
-                        document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day; //Ger fel veckodag
+                        if(n==3){
+                            document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day2;
+                        }else{
+                            document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day;
+                        }
                     }
                     switch(mm){
                         case 0:
-                            monthString = "Jan";
+                            monthString = "Jan"; break;
                         case 1:
-                            monthString = "Feb";
+                            monthString = "Feb"; break;
                         case 2:
-                            monthString = "Mar";
+                            monthString = "Mar"; break;
                         case 3:
-                            monthString = "Apr";
+                            monthString = "Apr"; break;
                         case 4:
-                            monthString = "Maj";
+                            monthString = "Maj"; break;
                         case 5:
-                            monthString = "Jun";
+                            monthString = "Jun"; break;
                         case 6:
-                            monthString = "Jul";
+                            monthString = "Jul"; break;
                         case 7:
-                            monthString = "Aug";
+                            monthString = "Aug"; break;
                         case 8:
-                            monthString = "Sep";
+                            monthString = "Sep"; break;
                         case 9:
-                            monthString = "Okt";
+                            monthString = "Okt"; break;
                         case 10:
-                            monthString = "Nov";
+                            monthString = "Nov"; break;
                         case 11:
-                            monthString = "Dec";
+                            monthString = "Dec"; break;
                     }
                     document.getElementById(`${numberOfCards2}datum${n}`).innerHTML =  dd + n + " " + monthString;
                     console.log(element);
