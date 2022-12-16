@@ -78,7 +78,7 @@
                     alert("Thats not a valid city name (or something)")
                 }else{
                     if(cityNames.includes(cityName.toLowerCase())){
-                        alert("You cant have the same city twice, stupid")
+                        alert("You cant have the same city twice")
                     }else{
                         let cardBox = document.getElementById("card2"); cardBox.classList.add("bg-secondary")
                         let card = document.createElement("div");
@@ -194,7 +194,22 @@
                     }else{
                         const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                         const d = new Date();
-                        let day = weekday[d.getDay()];
+                        let dayNumber = d.getDay();
+                        let day;
+                        switch(Math.ceil(dayNumber + (n/2))){ //Kollar nummer av dag det är och ifall det över listan går runt igen (kan finnas gömmd bugg)
+                            case 7:
+                                day = weekday[0]
+                                break;
+                            case 8:
+                                day = weekday[1]
+                                break;
+                            case 9:
+                                day = weekday[2]
+                                break;
+                            default:
+                                day = weekday[dayNumber + Math.ceil(n/2)]
+                                break;
+                        }
                         document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day; //Ger fel veckodag
                     }
                     switch(mm){
