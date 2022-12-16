@@ -176,7 +176,7 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
         function createCard(){ //Ändrar kortet och ger värdet för 4 dagar
-            cityName = document.getElementById("input").value;
+            cityName = document.getElementById("input").value; document.getElementById("input").value = "";
             cityNames.push(cityName.toLowerCase());
             document.getElementById(`${numberOfCards2}CityName`).innerHTML = capitalizeFirstLetter(cityName);
             let n = 0;
