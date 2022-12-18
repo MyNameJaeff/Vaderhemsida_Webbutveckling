@@ -197,13 +197,36 @@
                         let dayNumber = d.getDay();
                         let day; let day2;
                         switch(dayNumber){ //Kollar nummer av dag det är och ifall det över listan går runt igen (kan finnas gömmd bugg baserat på datum osv osv)
+                            case 0:
+                                day = weekday[2];
+                                day2 = weekday[3];
+                                break;
+                            case 1:
+                                day = weekday[3];
+                                day2 = weekday[4];
+                                break;
+                            case 2:
+                                day = weekday[4];
+                                day2 = weekday[5];
+                                break;
+                            case 3:
+                                day = weekday[5];
+                                day2 = weekday[6];
+                                break;
+                            case 4:
+                                day = weekday[6];
+                                day2 = weekday[0];
+                                break;
                             case 5:
                                 day = weekday[0];
                                 day2 = weekday[1];
+                                break;
                             case 6:
                                 day = weekday[1];
                                 day2 = weekday[2];
+                                break;
                         }
+                        console.log(dayNumber)
                         if(n==3){
                             document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day2;
                         }else{
