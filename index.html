@@ -59,10 +59,14 @@
 </head>
 <body class="bg-dark">
     <div class="container bg-secondary d-flex flex-row justify-content-center align-items-center" style="height: 100px; margin-top: 0.5%;">
-        <input id="input" required placeholder="City name here">
-        <button id="submit" onclick="createNewCard()">Button</button>
+        <div class="input-group mb-3">
+            <input id="input" type="text" class="form-control" placeholder="City name here">
+            <div class="input-group-append">
+              <button id="submit" onclick="createNewCard()" class="btn btn-primary" type="button">Button</button>
+            </div>
+        </div>
     </div>
-    <div id="card2" class="p-3 cardBoxStyling" id="cardContainer">
+    <div id="card2" class="p-3 cardBoxStyling">
         
     </div>
     <script>
@@ -122,7 +126,6 @@
                             let day = document.createElement("h5");
                             let date = document.createElement("h5");
                             day.id = `${numberOfCards}dag${x}`; date.id = `${numberOfCards}datum${x}`; //Båda måste ha tal på slutet 1-4
-
                             
                             cardBox1.appendChild(day); cardBox1.appendChild(date);
                             let cardTemp = document.createElement("div");
@@ -165,7 +168,7 @@
                         }
                         // !3
                         card.appendChild(cardBod);
-                        cardBox.append(card);
+                        cardBox.insertBefore(card, cardBox.firstChild);
                         numberOfCards++;
                         createCard();
                     }
@@ -226,7 +229,6 @@
                                 day2 = weekday[2];
                                 break;
                         }
-                        console.log(dayNumber)
                         if(n==3){
                             document.getElementById(`${numberOfCards2}dag${n}`).innerHTML = day2;
                         }else{
@@ -261,8 +263,8 @@
                     }
                     document.getElementById(`${numberOfCards2}datum${n}`).innerHTML =  dd + n + " " + monthString;
                     console.log(element);
-                    document.getElementById(`${numberOfCards2}hTemp${n}`).innerHTML = Math.ceil(element.main.temp_max - 273.15) + "°";
-                    document.getElementById(`${numberOfCards2}lTemp${n}`).innerHTML = Math.ceil(element.main.temp_min - 273.15) + "°";
+                    document.getElementById(`${numberOfCards2}hTemp${n}`).innerHTML = Math.ceil(element.main.temp_max - 273.15) + "°C";
+                    document.getElementById(`${numberOfCards2}lTemp${n}`).innerHTML = Math.ceil(element.main.temp_min - 273.15) + "°C";
                     if(element.hasOwnProperty("snow")){
                         document.getElementById(`${numberOfCards2}regn${n}`).innerHTML = Object.values(element.snow)[0] + "mm"; 
                     }else if(element.hasOwnProperty("rain")){
